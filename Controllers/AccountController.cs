@@ -73,24 +73,44 @@ namespace Genii_Assessment.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
+            using (var db = new ApplicationDbContext())
+            {
+                var user = await UserManager.FindByNameAsync(model.Email);
+
+                if (user != null && !user.IsActive)
+                {
+                    ModelState.AddModelError("", "Your account is inactive. Please contact an administrator.");
+                    return View(model);
+                }
+            }
+
+            // This does not count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(
+                model.Email,
+                model.Password,
+                model.RememberMe,
+                shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction(
+                        "SendCode",
+                        new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
         }
-
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
