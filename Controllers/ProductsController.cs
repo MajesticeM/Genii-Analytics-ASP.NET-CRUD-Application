@@ -17,18 +17,17 @@ namespace Genii_Assessment.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
 
-
+        /// <summary>
         /// Default constructor.
-
+        /// </summary>
         public ProductsController()
         {
             _dbContext = new ApplicationDbContext();
         }
 
-
+        /// <summary>
         /// Displays a list of active products.
-
-        /// <returns>Product list view.</returns>
+        /// </summary>
         public async Task<ActionResult> Index()
         {
             var products = await _dbContext.Products
@@ -39,11 +38,9 @@ namespace Genii_Assessment.Controllers
             return View(products);
         }
 
-
+        /// <summary>
         /// Displays product details.
-
-        /// <param name="id">Product identifier.</param>
-        /// <returns>Details view.</returns>
+        /// </summary>
         public async Task<ActionResult> Details(int? id)
         {
             if (!id.HasValue)
@@ -61,24 +58,21 @@ namespace Genii_Assessment.Controllers
             return View(product);
         }
 
-
+        /// <summary>
         /// Displays the create product form.
-
-        /// <returns>Create view.</returns>
-        [Authorize(Roles = "Admin,Manager")]
+        /// </summary>
+        [Authorize(Roles = ApplicationRoles.Admin + "," + ApplicationRoles.User + "," + ApplicationRoles.Manager)]
         public ActionResult Create()
         {
             return View();
         }
 
-
+        /// <summary>
         /// Creates a new product.
-
-        /// <param name="product">Product model.</param>
-        /// <returns>Redirect to product list on success.</returns>
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = ApplicationRoles.Admin + "," + ApplicationRoles.User + "," + ApplicationRoles.Manager)]
         public async Task<ActionResult> Create(Product product)
         {
             if (!ModelState.IsValid)
@@ -93,12 +87,10 @@ namespace Genii_Assessment.Controllers
             return RedirectToAction("Index");
         }
 
-
+        /// <summary>
         /// Displays the edit form for an existing product.
-
-        /// <param name="id">Product identifier.</param>
-        /// <returns>Edit view.</returns>
-        [Authorize(Roles = "Admin,Manager")]
+        /// </summary>
+        [Authorize(Roles = ApplicationRoles.Admin + "," + ApplicationRoles.User + "," + ApplicationRoles.Manager)]
         public async Task<ActionResult> Edit(int? id)
         {
             if (!id.HasValue)
@@ -116,14 +108,12 @@ namespace Genii_Assessment.Controllers
             return View(product);
         }
 
-
+        /// <summary>
         /// Updates an existing product.
-
-        /// <param name="product">Product model.</param>
-        /// <returns>Redirect to product list on success.</returns>
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = ApplicationRoles.Admin + "," + ApplicationRoles.User + "," + ApplicationRoles.Manager)]
         public async Task<ActionResult> Edit(Product product)
         {
             if (!ModelState.IsValid)
@@ -150,12 +140,10 @@ namespace Genii_Assessment.Controllers
             return RedirectToAction("Index");
         }
 
-
+        /// <summary>
         /// Displays the deactivate confirmation view.
-
-        /// <param name="id">Product identifier.</param>
-        /// <returns>Delete confirmation view.</returns>
-        [Authorize(Roles = "Admin,Manager")]
+        /// </summary>
+        [Authorize(Roles = ApplicationRoles.Admin + "," + ApplicationRoles.User + "," + ApplicationRoles.Manager)]
         public async Task<ActionResult> Delete(int? id)
         {
             if (!id.HasValue)
@@ -173,14 +161,12 @@ namespace Genii_Assessment.Controllers
             return View(product);
         }
 
-
+        /// <summary>
         /// Soft deletes a product by marking it inactive.
-
-        /// <param name="id">Product identifier.</param>
-        /// <returns>Redirect to product list on success.</returns>
+        /// </summary>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = ApplicationRoles.Admin + "," + ApplicationRoles.User + "," + ApplicationRoles.Manager)]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             var product = await _dbContext.Products.FindAsync(id);
@@ -198,10 +184,6 @@ namespace Genii_Assessment.Controllers
             return RedirectToAction("Index");
         }
 
-
-        /// Releases controller resources.
-
-        /// <param name="disposing">Dispose flag.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

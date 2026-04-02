@@ -14,7 +14,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Genii_Assessment.Controllers
 {
-    [Authorize(Roles = ApplicationRoles.Admin)]
+    [Authorize(Roles = ApplicationRoles.Admin + "," + ApplicationRoles.Manager)]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -262,6 +262,61 @@ namespace Genii_Assessment.Controllers
             }
 
             TempData["SuccessMessage"] = "User updated successfully.";
+            return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = ApplicationRoles.Admin + "," + ApplicationRoles.Manager)]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = await UserManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = ApplicationRoles.Admin + "," + ApplicationRoles.Manager)]
+        public async Task<ActionResult> DeleteConfirmed(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = await UserManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (user.Id == User.Identity.GetUserId())
+            {
+                TempData["ErrorMessage"] = "You cannot deactivate your own account.";
+                return RedirectToAction("Index");
+            }
+
+            user.IsActive = false;
+
+            var result = await UserManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                AddIdentityErrors(result);
+                return View(user);
+            }
+
+            TempData["SuccessMessage"] = "User deactivated successfully.";
             return RedirectToAction("Index");
         }
 

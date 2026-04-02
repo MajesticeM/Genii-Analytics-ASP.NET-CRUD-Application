@@ -13,7 +13,7 @@
     </div>
 }
 
-@if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+@if (Request.IsAuthenticated)
 {
     <p>
         @Html.ActionLink("Create New Product", "Create", null, new { @class = "btn btn-primary" })
@@ -42,14 +42,10 @@
                 <td>@(product.IsActive ? "Active" : "Inactive")</td>
                 <td>
                     @Html.ActionLink("Details", "Details", new { id = product.Id }, new { @class = "btn btn-sm btn-info" })
-
-                    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
-                    {
-                        @Html.Raw(" ")
-                        @Html.ActionLink("Edit", "Edit", new { id = product.Id }, new { @class = "btn btn-sm btn-warning" })
-                        @Html.Raw(" ")
-                        @Html.ActionLink("Deactivate", "Delete", new { id = product.Id }, new { @class = "btn btn-sm btn-danger" })
-                    }
+                    @Html.Raw(" ")
+                    @Html.ActionLink("Edit", "Edit", new { id = product.Id }, new { @class = "btn btn-sm btn-warning" })
+                    @Html.Raw(" ")
+                    @Html.ActionLink("Deactivate", "Delete", new { id = product.Id }, new { @class = "btn btn-sm btn-danger" })
                 </td>
             </tr>
         }
