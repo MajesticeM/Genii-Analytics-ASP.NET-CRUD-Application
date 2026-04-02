@@ -36,7 +36,12 @@
                 <td>@(user.IsActive ? "Yes" : "No")</td>
                 <td>@user.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = user.Id }, new { @class = "btn btn-sm btn-warning" })
+                    @if (User.IsInRole(Genii_Assessment.Models.ApplicationRoles.Admin) || User.IsInRole(Genii_Assessment.Models.ApplicationRoles.Manager))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = user.Id }, new { @class = "btn btn-warning btn-sm" })
+                        @Html.Raw(" ")
+                        @Html.ActionLink("Delete", "Delete", new { id = user.Id }, new { @class = "btn btn-danger btn-sm" })
+                    }
                 </td>
             </tr>
         }
