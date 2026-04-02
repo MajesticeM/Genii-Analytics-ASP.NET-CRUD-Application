@@ -4,9 +4,9 @@
     ViewBag.Title = "Deactivate Product";
 }
 
-<h2>Deactivate Product</h2>
+<h2>Delete Product</h2>
 
-<h3>Are you sure you want to deactivate this product?</h3>
+<h3>Are you sure you want to delete this product?</h3>
 
 <div>
     <hr />
@@ -30,7 +30,7 @@
         @Html.HiddenFor(m => m.Id)
 
         <div class="form-actions no-color">
-            <input type="submit" value="Deactivate" class="btn btn-danger" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
             @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
         </div>
     }

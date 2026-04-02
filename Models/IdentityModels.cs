@@ -8,30 +8,30 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Genii_Assessment.Models
 {
-    /// <summary>
+     
     /// Represents an authenticated user within the system.
     /// Extends ASP.NET IdentityUser to include additional application-specific fields.
-    /// </summary>
+     
     public class ApplicationUser : IdentityUser
     {
-        /// <summary>
+         
         /// Indicates whether the user account is active.
-        /// </summary>
+         
         public bool IsActive { get; set; }
 
-        /// <summary>
+         
         /// The date and time the user account was created.
-        /// </summary>
+         
         public DateTime CreatedAt { get; set; }
 
-        /// <summary>
+         
         /// Navigation property for invoices created by this user.
-        /// </summary>
+         
         public virtual ICollection<Invoice> CreatedInvoices { get; set; }
 
-        /// <summary>
+         
         /// Constructor to initialize default values.
-        /// </summary>
+         
         public ApplicationUser()
         {
             IsActive = true;
@@ -39,9 +39,9 @@ namespace Genii_Assessment.Models
             CreatedInvoices = new HashSet<Invoice>();
         }
 
-        /// <summary>
+         
         /// Generates the ClaimsIdentity used for authentication.
-        /// </summary>
+         
         /// <param name="manager">User manager instance</param>
         /// <returns>ClaimsIdentity for the authenticated user</returns>
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -57,46 +57,46 @@ namespace Genii_Assessment.Models
         }
     }
 
-    /// <summary>
+     
     /// Database context for the application.
     /// Extends IdentityDbContext to include application entities.
-    /// </summary>
+     
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        /// <summary>
+         
         /// Default constructor using connection string "DefaultConnection".
-        /// </summary>
+         
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        /// <summary>
+         
         /// Products table.
-        /// </summary>
+         
         public DbSet<Product> Products { get; set; }
 
-        /// <summary>
+         
         /// Invoices table.
-        /// </summary>
+         
         public DbSet<Invoice> Invoices { get; set; }
 
-        /// <summary>
+         
         /// Invoice items table.
-        /// </summary>
+         
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
 
-        /// <summary>
+         
         /// Factory method for creating the context.
-        /// </summary>
+         
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
 
-        /// <summary>
+         
         /// Configures entity relationships and database schema rules.
-        /// </summary>
+         
         /// <param name="modelBuilder">Model builder instance</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

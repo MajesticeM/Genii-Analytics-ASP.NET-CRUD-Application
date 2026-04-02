@@ -21,17 +21,16 @@ namespace Genii_Assessment.Controllers
         private ApplicationUserManager _userManager;
         private RoleManager<IdentityRole> _roleManager;
 
-        /// <summary>
+        
         /// Default constructor.
-        /// </summary>
         public UsersController()
         {
             _dbContext = new ApplicationDbContext();
         }
 
-        /// <summary>
+        
         /// Gets the ASP.NET Identity user manager.
-        /// </summary>
+        
         public ApplicationUserManager UserManager
         {
             get
@@ -44,9 +43,9 @@ namespace Genii_Assessment.Controllers
             }
         }
 
-        /// <summary>
+        
         /// Gets the role manager.
-        /// </summary>
+        
         public RoleManager<IdentityRole> RoleManager
         {
             get
@@ -59,9 +58,9 @@ namespace Genii_Assessment.Controllers
             }
         }
 
-        /// <summary>
+        
         /// Displays a list of users.
-        /// </summary>
+        
         /// <returns>User list view.</returns>
         public async Task<ActionResult> Index()
         {
@@ -93,9 +92,9 @@ namespace Genii_Assessment.Controllers
             return View(model);
         }
 
-        /// <summary>
+        
         /// Displays the create user form.
-        /// </summary>
+        
         /// <returns>Create user view.</returns>
         public ActionResult Create()
         {
@@ -107,9 +106,9 @@ namespace Genii_Assessment.Controllers
             return View(model);
         }
 
-        /// <summary>
+        
         /// Creates a new user.
-        /// </summary>
+        
         /// <param name="model">Create user model.</param>
         /// <returns>Redirect to user list on success.</returns>
         [HttpPost]
@@ -164,9 +163,9 @@ namespace Genii_Assessment.Controllers
             return RedirectToAction("Index");
         }
 
-        /// <summary>
+        
         /// Displays the edit form for a user.
-        /// </summary>
+        
         /// <param name="id">User identifier.</param>
         /// <returns>Edit view.</returns>
         public async Task<ActionResult> Edit(string id)
@@ -197,9 +196,9 @@ namespace Genii_Assessment.Controllers
             return View(model);
         }
 
-        /// <summary>
+        
         /// Updates an existing user.
-        /// </summary>
+        
         /// <param name="model">Edit user model.</param>
         /// <returns>Redirect to user list on success.</returns>
         [HttpPost]
@@ -320,9 +319,9 @@ namespace Genii_Assessment.Controllers
             return RedirectToAction("Index");
         }
 
-        /// <summary>
+        
         /// Builds role options for dropdown lists.
-        /// </summary>
+        
         /// <returns>Collection of role select list items.</returns>
         private IQueryable<SelectListItem> GetRoleSelectListItems()
         {
@@ -335,9 +334,9 @@ namespace Genii_Assessment.Controllers
                 });
         }
 
-        /// <summary>
+        
         /// Adds identity errors to model state.
-        /// </summary>
+        
         /// <param name="result">Identity result.</param>
         private void AddIdentityErrors(IdentityResult result)
         {
@@ -347,9 +346,9 @@ namespace Genii_Assessment.Controllers
             }
         }
 
-        /// <summary>
+        
         /// Releases controller resources.
-        /// </summary>
+        
         /// <param name="disposing">Dispose flag.</param>
         protected override void Dispose(bool disposing)
         {
