@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    
+
                     @if (User.Identity.IsAuthenticated && (User.IsInRole(Genii_Assessment.Models.ApplicationRoles.Admin) || User.IsInRole(Genii_Assessment.Models.ApplicationRoles.Manager)))
                     {
                         <li>@Html.ActionLink("Users", "Index", "Users", null, new { @class = "nav-link" })</li>
@@ -29,6 +29,11 @@
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Products", "Index", "Products", null, new { @class = "nav-link" })</li>
+                    }
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Invoices", "Index", "Invoices", null, new { @class = "nav-link" })</li>
                     }
                 </ul>
                  @Html.Partial("_LoginPartial")
