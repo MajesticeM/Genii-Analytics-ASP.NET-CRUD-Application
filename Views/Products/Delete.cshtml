@@ -1,0 +1,37 @@
+﻿@model Genii_Assessment.Models.Product
+
+@{
+    ViewBag.Title = "Deactivate Product";
+}
+
+<h2>Deactivate Product</h2>
+
+<h3>Are you sure you want to deactivate this product?</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+
+        <dt>Cost Per Item</dt>
+        <dd>@Model.CostPerItem.ToString("C")</dd>
+
+        <dt>Quantity In Stock</dt>
+        <dd>@Model.QuantityInStock</dd>
+
+        <dt>Restock Threshold</dt>
+        <dd>@Model.RestockThreshold</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deactivate" class="btn btn-danger" />
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
