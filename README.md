@@ -220,7 +220,7 @@ Invoice totals are calculated using JavaScript to:
 
 ---
 
-## Work Intentionally Left as Tickets (Important)
+## Work Left as Tickets (Important)
 
 To reflect real-world development and project planning, some features were intentionally **not fully implemented** and tracked as GitHub issues.
 
