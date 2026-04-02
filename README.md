@@ -87,7 +87,7 @@ Role	Permissions
 Admin	Full user management, product management
 User	Create and manage own invoices
 Manager	View/edit all invoices, access reports, view restock alerts
-⚙️ Setup Instructions
+Setup Instructions
 1. Clone the Repository
 gh repo clone MajesticeM/Genii-Analytics-ASP.NET-CRUD-Application
 2. Open Solution
@@ -136,7 +136,7 @@ Pull Requests with self-review
 Incremental commits over time
 
 Kanban Workflow
-Backlog → Ready → In Progress → In Review → Done
+Backlog → Todo → In Progress → In Review → Done
 
 Branching Strategy
 main → stable branch
@@ -152,13 +152,17 @@ Reporting Dashboard
 Restock Notification
 
 Known Limitations / Future Improvements
-The following enhancements were intentionally scoped out and tracked as issues:
-Export reports to CSV/PDF
-Add audit logging for invoice changes
-Improve UI/UX responsiveness
-Add automated unit/integration tests
-Advanced reporting filters
-API documentation expansion
+-The following enhancements were intentionally scoped out and tracked as issues/tickets:
+-User Invoice CRUD
+-Add restock warning notification for managers
+-User invoice logging
+-Export reports to CSV/PDF
+-Add audit logging for invoice changes
+-Implement manager invoice oversight
+-Improve UI/UX responsiveness
+-Add automated unit/integration tests
+-Advanced reporting filters
+-API documentation expansion
 
 API Notes (Basic)
 Basic controller actions follow standard MVC patterns:
@@ -188,5 +192,4 @@ Author
 Mashudu Ralephata
 Senior Full Stack Developer
 
-Submission
-This repository was created as part of a practical assessment and submitted for evaluation.
+
