@@ -152,16 +152,27 @@ Reporting Dashboard
 Restock Notification
 
 Known Limitations / Future Improvements
+<br/>
 -The following enhancements were intentionally scoped out and tracked as issues/tickets:
+<br/>
 -User Invoice CRUD
+<br/>
 -Add restock warning notification for managers
+<br/>
 -User invoice logging
+<br/>
 -Export reports to CSV/PDF
+<br/>
 -Add audit logging for invoice changes
+<br/>
 -Implement manager invoice oversight
+<br/>
 -Improve UI/UX responsiveness
+<br/>
 -Add automated unit/integration tests
+<br/>
 -Advanced reporting filters
+<br/>
 -API documentation expansion
 
 API Notes (Basic)
