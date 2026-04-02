@@ -1,0 +1,40 @@
+﻿@model Genii_Assessment.Models.Product
+
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<h2>Product Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+
+        <dt>Cost Per Item</dt>
+        <dd>@Model.CostPerItem.ToString("C")</dd>
+
+        <dt>Quantity In Stock</dt>
+        <dd>@Model.QuantityInStock</dd>
+
+        <dt>Restock Threshold</dt>
+        <dd>@Model.RestockThreshold</dd>
+
+        <dt>Status</dt>
+        <dd>@(Model.IsActive ? "Active" : "Inactive")</dd>
+
+        <dt>Created At</dt>
+        <dd>@Model.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</dd>
+    </dl>
+</div>
+
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+        @Html.Raw(" ")
+    }
+
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</p>
