@@ -11,7 +11,7 @@ Track product sales
 Generate reports
 Receive restock notifications
 
-The project was intentionally managed using GitHub Issues, Kanban board, feature branches, and pull requests to simulate a real-world team environment.
+The project is managed using GitHub Issues, Kanban board, feature branches, and pull requests.
 
 
 Features
@@ -89,7 +89,7 @@ User	Create and manage own invoices
 Manager	View/edit all invoices, access reports, view restock alerts
 ⚙️ Setup Instructions
 1. Clone the Repository
-git clone https://github.com/your-username/your-repo.git
+gh repo clone MajesticeM/Genii-Analytics-ASP.NET-CRUD-Application
 2. Open Solution
 Open in Visual Studio 2022
 Ensure .NET Framework 4.7.2+ is installed
