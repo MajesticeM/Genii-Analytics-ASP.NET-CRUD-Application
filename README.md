@@ -1,206 +1,267 @@
-Project Overview
+# Genii Analytics Assessment – Inventory & Invoicing System
 
-This project is a small inventory and invoicing management system built as part of a practical assessment.
-The goal of the system is to demonstrate full-stack development skills, clean architecture, and structured project management using GitHub.
+## Overview
 
-The application allows users to:
+This project is a simple inventory and invoicing system built as part of a practical assessment.
 
-Manage products and stock levels
-Create and manage invoices
-Track product sales
-Generate reports
-Receive restock notifications
+The goal of the project is to demonstrate:
 
-The project is managed using GitHub Issues, Kanban board, feature branches, and pull requests.
+* clean code structure
+* proper use of GitHub (issues, commits, pull requests)
+* role-based security
+* full-stack development skills using ASP.NET MVC
+
+The system allows users to manage products and create invoices with multiple items.
+
+---
+
+## Tech Stack
+
+* ASP.NET MVC (.NET Framework 4.7.2)
+* C#
+* Entity Framework 6 (Code First)
+* SQL Server
+* LINQ
+* JavaScript / jQuery
+
+---
+
+## Features Implemented
+
+### Authentication & Roles
+
+* Secure login system using ASP.NET Identity
+* Role-based access control
+* Roles:
+
+  * Admin
+  * User
+  * Manager
+
+### Default Login (Seeded)
+
+```
+Email: admin@geniiassessment.local
+Password: Admin@12345
+```
+
+---
+
+### User Management (Admin + Manager)
+
+* Create users
+* Edit users
+* Delete users
+* Assign roles
+* Activate / deactivate users
+
+---
+
+### Product Management
+
+* Create products
+* Edit products
+* Delete products
+* Track:
+
+  * Name
+  * Cost per item
+  * Quantity in stock
+
+---
+
+### Invoice Management (User Invoice CRUD)
+
+Users can:
+
+* Create invoices
+* Edit their own invoices
+* View their own invoices
+* Add multiple items per invoice
+
+Invoice includes:
+
+* Invoice date
+* User who created it
+* Total amount
+
+---
+
+### Client-Side Invoice Calculation
+
+* Line totals update instantly
+* Invoice total updates automatically
+* No server communication required (as per requirement)
+
+---
+
+## Project Structure
+
+* **Controllers** → Handle requests
+* **Models** → Database entities
+* **ViewModels** → UI-specific models
+* **Views** → Razor pages
+* **Data (DbContext)** → Database access
+* **Migrations** → Code-first database setup
+
+---
+
+## How to Run the Project
+
+### 1. Clone Repository
+
+```
+git clone https://github.com/MajesticeM/Genii-Analytics-ASP.NET-CRUD-Application.git
+```
+
+### 2. Open in Visual Studio
+
+* Use Visual Studio 2022
+* Ensure .NET Framework 4.7.2+ is installed
+
+---
+
+### 3. Database Setup
+
+This project uses **SQL Server LocalDB / SQL Server Object Explorer**
 
 
-Features
 
-Authentication & Authorization
-Secure login system
-Role-based access control
-Three roles:
-Admin
-User
-Manager
+Run:
 
-User Management (Admin)
-Create users
-Edit users
-Assign roles
-Activate/deactivate users
-
-Product Management
-Create, edit, and manage products
-Track:
-Product name
-Cost per item
-Quantity in stock
-Restock threshold
-
-Invoice Management
-Create invoices
-Edit invoices
-Add multiple products to invoices
-Automatic total calculation (client-side, no server calls)
-Track:
-Invoice date
-User who created the invoice
-Total amount
-Manager Dashboard & Reporting
-Managers have access to:
-
-All invoices (view and edit)
-Reports including:
-Number of items sold per product
-Total number of products
-Total products sold
-Products in stock
-Stock vs sold comparison
-
-Restock Notification
-Managers receive a single consolidated notification
-Displays all products below restock threshold
-Triggered dynamically from product stock levels
-
-Tech Stack
-Backend: ASP.NET MVC (.NET Framework 4.7.2+)
-Language: C#
-Frontend: HTML, CSS, JavaScript (jQuery)
-ORM: Entity Framework 6 (Code First)
-Database: SQL Server
-Querying: LINQ
-
-Architecture & Structure
-The application follows a clean and maintainable structure:
-
-Controllers → Handle HTTP requests
-Models → Domain entities
-ViewModels → UI-specific data structures
-Data → DbContext and database configuration
-Migrations → Code-first migrations
-Views → Razor views
-Scripts → JavaScript logic (invoice calculations)
-
-Roles & Permissions
-Role	Permissions
-Admin	Full user management, product management
-User	Create and manage own invoices
-Manager	View/edit all invoices, access reports, view restock alerts
-Setup Instructions
-1. Clone the Repository
-gh repo clone MajesticeM/Genii-Analytics-ASP.NET-CRUD-Application
-2. Open Solution
-Open in Visual Studio 2022
-Ensure .NET Framework 4.7.2+ is installed
-3. Configure Database
-Update your connection string in:
-
-Web.config
-4. Run Migrations
-Open Package Manager Console:
-
-Enable-Migrations
-Add-Migration InitialCreate
+```
 Update-Database
-5. Run the Application
-Press F5 or click Run
-Navigate to the login page
+```
 
-Key Technical Decisions
-Client-Side Invoice Calculation
+This will:
 
-Invoice totals are calculated using JavaScript (client-side) to:
+* create the database
+* create Identity tables
+* seed roles and admin user
 
-Improve responsiveness
-Avoid unnecessary server calls
-Meet assessment requirement
-Entity Framework Code-First
-Database schema is generated from models
-Enables easy migrations and version control
-Role-Based Authorization
-Implemented using [Authorize] attributes
-Ensures proper access control across the system
-Restock Notification Design
-Implemented as a single aggregated alert
-Avoids notification spam
-Provides clear manager visibility
+---
 
-Project Management Approach
-This project was managed using:
+### 4. Run the Application
 
-GitHub Issues (task breakdown)
-GitHub Kanban Board (progress tracking)
-Feature Branching Strategy
-Pull Requests with self-review
-Incremental commits over time
+Press:
 
-Kanban Workflow
-Backlog → Todo → In Progress → In Review → Done
+```
+F5
+```
 
-Branching Strategy
-main → stable branch
-feature/* → feature development
-docs/* → documentation updates
+Navigate to:
 
-Example Features Implemented via Issues
-Authentication & Roles
-User CRUD
-Product CRUD
-Invoice Management
-Reporting Dashboard
-Restock Notification
+```
+/Account/Login
+```
 
-Known Limitations / Future Improvements
-<br/>
--The following enhancements were intentionally scoped out and tracked as issues/tickets:
-<br/>
--User Invoice CRUD
-<br/>
--Add restock warning notification for managers
-<br/>
--User invoice logging
-<br/>
--Export reports to CSV/PDF
-<br/>
--Add audit logging for invoice changes
-<br/>
--Implement manager invoice oversight
-<br/>
--Improve UI/UX responsiveness
-<br/>
--Add automated unit/integration tests
-<br/>
--Advanced reporting filters
-<br/>
--API documentation expansion
+Login using admin credentials above.
 
-API Notes (Basic)
-Basic controller actions follow standard MVC patterns:
+---
 
-GET /Products
-POST /Invoices/Create
-GET /Reports
+## Roles & Permissions
 
-Further API documentation can be extended in future iterations.
+| Role    | Access                                         |
+| ------- | ---------------------------------------------- |
+| Admin   | Full system access (users, products, invoices) |
+| User    | Create and manage own invoices                 |
+| Manager | Manage users + (future: reporting & oversight) |
 
-Testing Notes
-Manual testing performed for:
-Invoice calculations
-Role-based access restrictions
-CRUD operations
-Reporting accuracy
+---
 
-Future work includes adding automated test coverage.
+## GitHub Workflow (Important for Assessment)
 
-Assumptions
-Invoice totals are trusted from client input but validated server-side
-Stock levels are manually managed (no automatic deduction logic implemented)
-Restock threshold is configurable per product
+This project follows a structured workflow:
 
+* Feature branches (`feature/...`)
+* GitHub Issues for task tracking
+* Pull Requests for merging
+* Self-review before merge
+* Incremental commits
 
-Author
-Mashudu Ralephata
-Senior Full Stack Developer
+### Example Branches
+
+* `feature-auth-and-roles`
+* `feature-user-management`
+* `feature-product-crud`
+* `feature-user-invoice-crud`
+
+---
+
+## Kanban Workflow
+
+Backlog → To Do → In Progress → Review → Done
+
+---
+
+## Key Technical Decisions
+
+### 1. Client-Side Invoice Totals
+
+Invoice totals are calculated using JavaScript to:
+
+* improve performance
+* meet requirement (no server calls)
+
+---
+
+### 2. Entity Framework Code First
+
+* Database created from models
+* Easy migrations
+* Clean version control
+
+---
+
+### 3. Role-Based Authorization
+
+* `[Authorize(Roles = "...")]` used
+* Ensures correct access control
+
+---
+
+## Work Intentionally Left as Tickets (Important)
+
+To reflect real-world development and project planning, some features were intentionally **not fully implemented** and tracked as GitHub issues.
+
+### Pending Features (Tickets)
+
+* Manager can view and edit all invoices
+* Reporting dashboard:
+
+  * items sold per product
+  * total products
+  * stock vs sold
+* Restock notification system
+* Automatic stock deduction after invoice creation
+* Auto-fill product price on selection
+* Export reports (CSV / PDF)
+* Audit logging
+* UI/UX improvements
+* Automated tests
+* Extended API documentation
+
+---
+
+## Basic API / Controller Notes
+
+Controllers follow standard MVC patterns:
+
+* `GET /Products`
+* `POST /Invoices/Create`
+* `GET /Invoices`
+
+Comments are included for key methods to support basic documentation.
+
+---
+
+## Testing
+
+Manual testing completed for:
+
+* login & role access
+* product CRUD
+* invoice creation and editing
+* client-side calculations
 
 
