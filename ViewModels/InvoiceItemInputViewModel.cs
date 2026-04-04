@@ -4,8 +4,9 @@ using System.Web.Mvc;
 
 namespace Genii_Assessment.ViewModels
 {
-   
+    /// <summary>
     /// Represents a single invoice item row.
+    /// </summary>
     public class InvoiceItemInputViewModel
     {
         [Required]
@@ -20,7 +21,7 @@ namespace Genii_Assessment.ViewModels
         [Display(Name = "Unit Cost")]
         public decimal UnitCost { get; set; }
 
-        
+        // Display-only.
         [Display(Name = "Line Total")]
         public decimal LineTotal { get; set; }
 

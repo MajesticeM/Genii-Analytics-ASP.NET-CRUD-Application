@@ -93,7 +93,6 @@ namespace Genii_Assessment.Controllers
 
 
         /// Creates a new invoice for the current user.
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(InvoiceCreateEditViewModel model)
@@ -116,21 +115,24 @@ namespace Genii_Assessment.Controllers
             {
                 InvoiceDate = model.InvoiceDate,
                 CreatedByUserId = currentUserId,
-                TotalAmount = model.TotalAmount,
                 CreatedAt = DateTime.UtcNow,
                 InvoiceItems = new List<InvoiceItem>()
             };
 
             foreach (var item in model.Items)
             {
+                var lineTotal = item.Quantity * item.UnitCost;
+
                 invoice.InvoiceItems.Add(new InvoiceItem
                 {
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
                     UnitCost = item.UnitCost,
-                    LineTotal = item.LineTotal
+                    LineTotal = lineTotal
                 });
             }
+
+            invoice.TotalAmount = invoice.InvoiceItems.Sum(x => x.LineTotal);
 
             _dbContext.Invoices.Add(invoice);
             await _dbContext.SaveChangesAsync();
@@ -139,9 +141,9 @@ namespace Genii_Assessment.Controllers
             return RedirectToAction("Index");
         }
 
-         
+
         /// Displays the edit form for a user-owned invoice.
-         
+
         public async Task<ActionResult> Edit(int? id)
         {
             if (!id.HasValue)
@@ -183,9 +185,8 @@ namespace Genii_Assessment.Controllers
             return View(model);
         }
 
-         
+
         /// Updates an existing invoice owned by the current user.
-         
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(InvoiceCreateEditViewModel model)
@@ -214,7 +215,6 @@ namespace Genii_Assessment.Controllers
             }
 
             invoice.InvoiceDate = model.InvoiceDate;
-            invoice.TotalAmount = model.TotalAmount;
             invoice.UpdatedAt = DateTime.UtcNow;
 
             _dbContext.InvoiceItems.RemoveRange(invoice.InvoiceItems);
@@ -222,21 +222,24 @@ namespace Genii_Assessment.Controllers
 
             foreach (var item in model.Items)
             {
+                var lineTotal = item.Quantity * item.UnitCost;
+
                 invoice.InvoiceItems.Add(new InvoiceItem
                 {
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
                     UnitCost = item.UnitCost,
-                    LineTotal = item.LineTotal
+                    LineTotal = lineTotal
                 });
             }
+
+            invoice.TotalAmount = invoice.InvoiceItems.Sum(x => x.LineTotal);
 
             await _dbContext.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Invoice updated successfully.";
             return RedirectToAction("Index");
         }
-
         private InvoiceItemInputViewModel BuildEmptyInvoiceItem()
         {
             return new InvoiceItemInputViewModel
