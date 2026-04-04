@@ -6,10 +6,10 @@ This project is a simple inventory and invoicing system built as part of a pract
 
 The goal of the project is to demonstrate:
 
-* clean code structure
-* proper use of GitHub (issues, commits, pull requests)
-* role-based security
-* full-stack development skills using ASP.NET MVC
+* Clean code structure
+* Proper use of GitHub (issues, commits, pull requests)
+* Role-based security
+* Full-stack development skills using ASP.NET MVC
 
 The system allows users to manage products and create invoices with multiple items.
 
@@ -43,6 +43,8 @@ The system allows users to manage products and create invoices with multiple ite
 ```
 Email: admin@geniiassessment.local
 Password: Admin@12345
+
+NB: Once you login, admin can create a normal user and manager to view functionality of other roles.  
 ```
 
 ---
@@ -135,9 +137,9 @@ Update-Database
 
 This will:
 
-* create the database
-* create Identity tables
-* seed roles and admin user
+* Create the database
+* Create Identity tables
+* Seed roles and admin user
 
 ---
 
@@ -200,8 +202,8 @@ Backlog → To Do → In Progress → Review → Done
 
 Invoice totals are calculated using JavaScript to:
 
-* improve performance
-* meet requirement (no server calls)
+* Improve performance
+* Meet requirement (no server calls)
 
 ---
 
@@ -229,9 +231,9 @@ To reflect real-world development and project planning, some features were inten
 * Manager can view and edit all invoices
 * Reporting dashboard:
 
-  * items sold per product
-  * total products
-  * stock vs sold
+  * Items sold per product
+  * Total products
+  * Stock vs sold
 * Restock notification system
 * Automatic stock deduction after invoice creation
 * Auto-fill product price on selection
@@ -259,9 +261,10 @@ Comments are included for key methods to support basic documentation.
 
 Manual testing completed for:
 
-* login & role access
-* product CRUD
-* invoice creation and editing
-* client-side calculations
+* Login & role access
+* Product CRUD
+* Invoice creation and editing
+* Client-side calculations
+* Cloning and running of the repositiory
 
 
